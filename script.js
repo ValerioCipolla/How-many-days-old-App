@@ -7,6 +7,8 @@ function calculatBtnHandler() {
   let difference = Date.now() - dob.getTime();
   let daysOld = parseInt(difference / 1000 / 60 / 60 / 24);
   let resultDiv = document.createElement("div");
+  let modal = document.createElement("div");
+  modal.className = "modal-bg";
   resultDiv.className = "result";
   if (isNaN(daysOld) || daysOld <= 0) {
   resultDiv.innerHTML = `
@@ -21,17 +23,18 @@ function calculatBtnHandler() {
   <button type="button" id="clear-btn">Clear</button>
   `;
   }
-  document.body.append(resultDiv);
-  calculateBtn.disabled = true;
+  document.body.append(modal);
+  modal.appendChild(resultDiv);
   clearBtn = document.getElementById("clear-btn");
   clearBtn.addEventListener("click", clearBtnHandler);
 }
 
 function clearBtnHandler() {
   let resultDiv = document.querySelector(".result");
+  let modal = document.querySelector(".modal-bg");
   resultDiv.remove()
+  modal.remove();
   document.querySelector("input").value = "";
-  calculateBtn.disabled = false;
 }
 
 calculateBtn.addEventListener("click", calculatBtnHandler);
